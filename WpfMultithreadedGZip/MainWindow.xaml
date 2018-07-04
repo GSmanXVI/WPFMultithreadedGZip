@@ -1,0 +1,59 @@
+﻿<Window x:Class="WpfMultithreadedGZip.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfMultithreadedGZip"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Margin="5" Command="{Binding BrowseCommand}">Browse...</Button>
+            <TextBlock Grid.Column="1" VerticalAlignment="Center" Margin="5" 
+                       TextTrimming="CharacterEllipsis" 
+                       Text="{Binding FileName}"
+                       ToolTip="{Binding FileName}"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Margin="5" Command="{Binding CompressCommand}">Compress</Button>
+            <Button Grid.Column="1" Margin="5" Command="{Binding DecompressCommand}">Decompress</Button>
+            <xctk:IntegerUpDown Grid.Column="2" Margin="5" Value="{Binding ThreadsCount}" Minimum="1" Maximum="4"/>
+        </Grid>
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <TextBlock Margin="5">Thread 1:</TextBlock>
+                <ProgressBar Name="progressBar1" Height="30" Margin="5" Value="{Binding Progress[0]}"></ProgressBar>
+                <TextBlock Margin="5">Thread 2:</TextBlock>
+                <ProgressBar Name="progressBar2" Height="30" Margin="5" Value="{Binding Progress[1]}"></ProgressBar>
+                <TextBlock Margin="5">Thread 3:</TextBlock>
+                <ProgressBar Name="progressBar3" Height="30" Margin="5" Value="{Binding Progress[2]}"></ProgressBar>
+                <TextBlock Margin="5">Thread 4:</TextBlock>
+                <ProgressBar Name="progressBar4" Height="30" Margin="5" Value="{Binding Progress[3]}"></ProgressBar>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Margin="5" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Time, StringFormat={}Time: {0} ms}"/>
+        </Grid>
+    </Grid>
+
+</Window>
